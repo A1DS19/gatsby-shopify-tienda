@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Grid = styled.section`
   display: grid;
   grid-template-columns: 1fr;
+  grid-gap: 20px;
 
   @media (min-width: 768px) {
     grid-template-columns: 1fr 1fr;
@@ -15,4 +16,18 @@ export const Grid = styled.section`
       order: 1;
     }
   }
+`;
+
+export const SelectWrapper = styled.div`
+  margin-top: 11px;
+  > strong {
+    display: block;
+    margin-bottom: 8px;
+  }
+`;
+
+export const Price = styled.div`
+  margin: 40px 0;
+  font-weight: bold;
+  font-size: 30px;
 `;
