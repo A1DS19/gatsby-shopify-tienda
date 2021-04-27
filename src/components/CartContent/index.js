@@ -1,8 +1,10 @@
 import React from 'react';
 import CartContext from 'context/CartContext';
-import { CartItem, CartHeader, CartFooter } from './styles';
+import { CartItem, CartHeader, CartFooter, Footer } from './styles';
 import { QuantityAjuster } from '../QuantityAjuster';
 import { RemoveLineItem } from '../RemoveLineItem';
+import { Button } from '../common/Button';
+import { navigate } from '@reach/router';
 
 export const CartContent = () => {
   const { checkout, updateLineItem } = React.useContext(CartContext);
@@ -36,21 +38,41 @@ export const CartContent = () => {
   return (
     <section>
       <h1>Tu Carrito</h1>
-      <CartHeader>
-        <div>Producto</div>
-        <div>Precio Unitario</div>
-        <div>Cantidad</div>
-        <div>Total</div>
-      </CartHeader>
-      <div>{renderCheckoutItems}</div>
-      <CartFooter>
+      {!!checkout?.lineItems && (
+        <React.Fragment>
+          <CartHeader>
+            <div>Producto</div>
+            <div>Precio Unitario</div>
+            <div>Cantidad</div>
+            <div>Total</div>
+          </CartHeader>
+          <div>{renderCheckoutItems}</div>
+        </React.Fragment>
+      )}
+
+      {!!checkout?.lineItems && (
+        <CartFooter>
+          <div>
+            <strong>Total Final:</strong>
+          </div>
+          <div>
+            <span>₡{checkout?.totalPrice}</span>
+          </div>
+        </CartFooter>
+      )}
+
+      <Footer>
         <div>
-          <strong>Total Final:</strong>
+          <Button onClick={() => navigate(-1)}>Continuar Comprando</Button>
         </div>
         <div>
-          <span>₡{checkout?.totalPrice}</span>
+          {!!checkout?.webUrl && (
+            <Button onClick={() => (window.location.href = checkout.webUrl)}>
+              Checkout
+            </Button>
+          )}
         </div>
-      </CartFooter>
+      </Footer>
     </section>
   );
 };

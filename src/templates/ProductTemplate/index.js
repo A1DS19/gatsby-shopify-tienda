@@ -1,31 +1,19 @@
 /*eslint-disable jsx-a11y/no-onchange*/
 import { graphql } from 'gatsby';
 import React from 'react';
-import { Layout, ImageGallery, ProductQuantityAdder } from 'components';
+import { Layout, ImageGallery, ProductQuantityAdder, SEO } from 'components';
 import { Grid, SelectWrapper, Price } from './styles';
 import CartContext from '../../context/CartContext';
 import { navigate, useLocation } from '@reach/router';
 import queryString from 'query-string';
+import { Button } from 'components';
 
 //al exportar hace accesable los datos en los
 //props
 export const query = graphql`
   query ProductQuery($shopifyId: String) {
     shopifyProduct(id: { eq: $shopifyId }) {
-      title
-      shopifyId
-      id
-      description
-      images {
-        id
-        localFile {
-          childImageSharp {
-            fluid(maxWidth: 300) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
-          }
-        }
-      }
+      ...ShopifyProductFields
     }
   }
 `;
@@ -79,6 +67,11 @@ export default function ProductTemplate(props) {
 
   return (
     <Layout>
+      <SEO
+        title={props.data.shopifyProduct.title}
+        description={props.data.shopifyProduct.description}
+      />
+      <Button onClick={() => navigate(-1)}>Volver</Button>
       <Grid>
         <div>
           <h1>{title}</h1>

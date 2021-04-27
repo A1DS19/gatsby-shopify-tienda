@@ -8,13 +8,13 @@ import ImageThumbnail from './ImageThumbnail';
 export const ImageGallery = ({ selectedVariantImageId, images }) => {
   const [activeImage, setActiveImage] = useState(
     images.find(img => img.id === selectedVariantImageId)?.localFile
-      .childImageSharp.fluid || images[0].localFile.childImageSharp.fluid
+      ?.childImageSharp?.fluid || images[0]?.localFile.childImageSharp?.fluid
   );
 
   React.useEffect(() => {
     setActiveImage(
-      images.find(img => img.id === selectedVariantImageId)?.localFile
-        .childImageSharp.fluid
+      images.find(img => img?.id === selectedVariantImageId)?.localFile
+        ?.childImageSharp?.fluid
     );
   }, [selectedVariantImageId, setActiveImage, images]);
 
