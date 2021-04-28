@@ -3,7 +3,7 @@ import Client from 'shopify-buy';
 
 const client = Client.buildClient({
   domain: `${process.env.GATSBY_SHOP_NAME}.myshopify.com`,
-  storefrontAccessToken: process.env.GATSBY_ACCESS_TOKEN,
+  storefrontAccessToken: process.env.GATSBY_SHOP_TOKEN,
 });
 
 const defaultState = {
@@ -42,8 +42,12 @@ export function CartContextProvider({ children }) {
   }, [setCheckout, setSuccessfulOrder, checkoutId]);
 
   async function getProductById(productId) {
-    const product = await client.product.fetch(productId);
-    return product;
+    try {
+      const product = await client.product.fetch(productId);
+      return product;
+    } catch (error) {
+      console.log(`CONTEXT: ${error}`);
+    }
   }
 
   const updateLineItem = async ({ variantId, quantity }) => {

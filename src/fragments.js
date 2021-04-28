@@ -18,6 +18,7 @@ export const ProductFields = graphql`
     }
   }
 `;
+
 export const ProductTileFields = graphql`
   fragment ProductTileFields on ShopifyProduct {
     handle

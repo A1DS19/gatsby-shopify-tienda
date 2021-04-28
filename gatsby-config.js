@@ -1,5 +1,5 @@
 require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV}`,
+  path: `.env`,
 });
 
 module.exports = {
@@ -29,8 +29,8 @@ module.exports = {
       options: {
         //NOTE*
         //el shop name debe estar en minuscula!!
-        shopName: process.env.GATSBY_SHOPIFY_SHOP_NAME,
-        accessToken: process.env.GATSBY_SHOPIFY_SHOP_TOKEN,
+        shopName: process.env.GATSBY_SHOP_NAME,
+        accessToken: process.env.GATSBY_SHOP_TOKEN,
         apiVersion: '2020-07',
       },
     },

@@ -20,29 +20,27 @@ export const query = graphql`
 
 export default function ProductTemplate(props) {
   const { data } = props;
+  const { title, description, images, shopifyId } = data.shopifyProduct;
   const { getProductById } = React.useContext(CartContext);
   const [product, setProduct] = React.useState(null);
   const [selectedVariant, setSelectedVariant] = React.useState(null);
-  const { title, description, images } = data.shopifyProduct;
   const { search, origin, pathname } = useLocation();
   const variantId = queryString.parse(search).variant;
 
   React.useEffect(() => {
     (async () => {
-      const res = await getProductById(data.shopifyProduct.shopifyId);
-      setProduct(res);
-      setSelectedVariant(
-        res.variants.find(variant => variant.id === variantId) ||
-          res.variants[0]
-      );
+      try {
+        const res = await getProductById(shopifyId);
+        setProduct(res);
+        setSelectedVariant(
+          res.variants.find(variant => variant.id === variantId) ||
+            res.variants[0]
+        );
+      } catch (error) {
+        console.log(`PRODUCT PAGE: ${error}`);
+      }
     })();
-  }, [
-    getProductById,
-    data,
-    setProduct,
-    data.shopifyProduct.shopifyId,
-    variantId,
-  ]);
+  }, [getProductById, data, setProduct, shopifyId, variantId]);
 
   const handleVariantChange = e => {
     const variant = product?.variants.find(
