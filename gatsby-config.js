@@ -29,8 +29,8 @@ module.exports = {
       options: {
         //NOTE*
         //el shop name debe estar en minuscula!!
-        shopName: process.env.GATSBY_SHOP_NAME,
-        accessToken: process.env.GATSBY_ACCESS_TOKEN,
+        shopName: process.env.GATSBY_SHOPIFY_SHOP_NAME,
+        accessToken: process.env.GATSBY_SHOPIFY_SHOP_TOKEN,
         apiVersion: '2020-07',
       },
     },
