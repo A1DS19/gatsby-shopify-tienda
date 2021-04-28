@@ -21,7 +21,8 @@ export const CollectionTile = ({
       <CollectionTileContent>
         <div>
           <Title sale={sale}>{title}</Title>
-          <Description sale={sale}>{description}</Description>
+          {/* <Description sale={sale}>{description}</Description> */}
+          <Description sale={sale}>Miguel playaso le gusta?</Description>
           <StyledLink to={destination}>Comprar ahora</StyledLink>
         </div>
       </CollectionTileContent>

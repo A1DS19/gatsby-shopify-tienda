@@ -13,6 +13,7 @@ export const Header = () => {
           <Logo />
         </Link>
       </div>
+
       <Search />
       <Cart />
     </HeaderWrapper>
